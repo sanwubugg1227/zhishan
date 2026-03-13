@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppContext } from "../store";
 import { UserProfile, FamilyMember, LocationData } from "../types";
 import { Save, Plus, Trash2, MapPin, Users, User, Locate, Loader2 } from "lucide-react";
@@ -49,42 +49,38 @@ export default function Profile() {
   const [showErrors, setShowErrors] = useState(false);
   const [showMemberForm, setShowMemberForm] = useState(false);
 
-  React.useEffect(() => {
-    if (!loc.city && !loc.country && "geolocation" in navigator) {
+  // 组件加载时，如果还没位置信息，自动尝试获取
+  useEffect(() => {
+    if (!loc.city && !loc.country) {
       handleDetectLocation();
     }
   }, []);
 
-  const handleDetectLocation = () => {
+  // 🌍 专为国内网络优化的定位函数 (基于 IP)
+  const handleDetectLocation = async () => {
     setIsLocating(true);
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          try {
-            const { latitude, longitude } = position.coords;
-            const res = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=${i18n.language}`
-            );
-            const data = await res.json();
-            if (data && data.address) {
-              setLoc({
-                city: data.address.city || data.address.town || data.address.village || "",
-                region: data.address.state || data.address.region || "",
-                country: data.address.country || "",
-              });
-            }
-          } catch (e) {
-            console.error(e);
-          } finally {
-            setIsLocating(false);
-          }
-        },
-        (error) => {
-          console.error(error);
-          setIsLocating(false);
-        }
-      );
-    } else {
+    try {
+      // 使用 ipapi.co，这个接口国内访问较快且不需要 Key，直接返回 JSON
+      const response = await fetch("https://ipapi.co/json/");
+      
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      
+      const data = await response.json();
+      
+      // 更新状态
+      setLoc({
+        city: data.city || "",
+        region: data.region || "",
+        country: data.country_name || "",
+      });
+      
+    } catch (error) {
+      console.error("Location detection failed:", error);
+      // 可选：如果定位失败，可以给用户一个提示
+      // alert("自动定位失败，请手动输入");
+    } finally {
       setIsLocating(false);
     }
   };
@@ -105,9 +101,7 @@ export default function Profile() {
 
   const handleAddMember = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
-    console.log("Adding member:", newMember);
     if (!newMember.name || !newMember.name.trim()) {
-      console.log("Name is required");
       alert(t("profile.nameRequired"));
       return;
     }
