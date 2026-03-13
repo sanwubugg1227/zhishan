@@ -15,7 +15,7 @@ export default function Profile() {
     removeFamilyMember,
     updateLocation,
   } = useAppContext();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [profile, setProfile] = useState<Partial<UserProfile>>(
     userProfile || {
@@ -56,12 +56,12 @@ export default function Profile() {
     }
   }, []);
 
-  // 🌍 专为国内网络优化的定位函数 (基于 IP)
+  // 🌍 专为国内网络优化的定位函数 (请求 Vercel 后端接口)
   const handleDetectLocation = async () => {
     setIsLocating(true);
     try {
-      // 使用 ipapi.co，这个接口国内访问较快且不需要 Key，直接返回 JSON
-      const response = await fetch("https://ipapi.co/json/");
+      // 请求我们自己写的后端云函数，绝对安全，不暴露高德 Key
+      const response = await fetch("/api/location");
       
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -69,11 +69,15 @@ export default function Profile() {
       
       const data = await response.json();
       
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       // 更新状态
       setLoc({
         city: data.city || "",
         region: data.region || "",
-        country: data.country_name || "",
+        country: data.country || "中国",
       });
       
     } catch (error) {
