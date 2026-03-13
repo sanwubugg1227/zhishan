@@ -1,4 +1,6 @@
 // 文件路径：api/generate.js
+export const maxDuration = 60; // 突破 10 秒限制，允许后台运行 60 秒
+
 export default async function handler(req, res) {
   // 只允许 POST 请求
   if (req.method !== 'POST') {
@@ -8,7 +10,7 @@ export default async function handler(req, res) {
   try {
     const { user, family, location, planType, preferences, language } = req.body;
 
-    // 【关键修改】：只从环境变量读取 Key，地址和模型直接写死，绝不报错！
+    // 从 Vercel 的环境变量中安全读取 Key
     const apiKey = process.env.SILICON_API_KEY;
     const baseUrl = "https://api.siliconflow.cn/v1/chat/completions";
     const modelName = "Qwen/Qwen2.5-7B-Instruct";
@@ -56,7 +58,6 @@ export default async function handler(req, res) {
       }),
     });
 
-    // 【新增日志】：如果对方报错，把对方的具体报错原因返回给前端
     if (!response.ok) {
       const errorText = await response.text();
       console.error("SiliconFlow API Error:", errorText);

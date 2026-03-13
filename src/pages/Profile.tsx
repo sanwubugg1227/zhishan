@@ -15,7 +15,7 @@ export default function Profile() {
     removeFamilyMember,
     updateLocation,
   } = useAppContext();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [profile, setProfile] = useState<Partial<UserProfile>>(
     userProfile || {
@@ -215,9 +215,9 @@ export default function Profile() {
               </label>
               <input
                 type="number"
-                value={profile.age}
+                value={profile.age ?? ""}
                 onChange={(e) =>
-                  setProfile({ ...profile, age: Number(e.target.value) })
+                  setProfile({ ...profile, age: e.target.value === "" ? undefined : Number(e.target.value) })
                 }
                 className="w-full p-3 bg-white/80 border border-slate-200 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-800 transition-all"
               />
@@ -252,9 +252,9 @@ export default function Profile() {
               </label>
               <input
                 type="number"
-                value={profile.height}
+                value={profile.height ?? ""}
                 onChange={(e) =>
-                  setProfile({ ...profile, height: Number(e.target.value) })
+                  setProfile({ ...profile, height: e.target.value === "" ? undefined : Number(e.target.value) })
                 }
                 className="w-full p-3 bg-white/80 border border-slate-200 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-800 transition-all"
               />
@@ -265,9 +265,9 @@ export default function Profile() {
               </label>
               <input
                 type="number"
-                value={profile.weight}
+                value={profile.weight ?? ""}
                 onChange={(e) =>
-                  setProfile({ ...profile, weight: Number(e.target.value) })
+                  setProfile({ ...profile, weight: e.target.value === "" ? undefined : Number(e.target.value) })
                 }
                 className="w-full p-3 bg-white/80 border border-slate-200 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-800 transition-all"
               />
@@ -505,9 +505,9 @@ export default function Profile() {
                 <input
                   type="number"
                   placeholder={t("profile.age")}
-                  value={newMember.age || ""}
+                  value={newMember.age ?? ""}
                   onChange={(e) =>
-                    setNewMember({ ...newMember, age: Number(e.target.value) })
+                    setNewMember({ ...newMember, age: e.target.value === "" ? undefined : Number(e.target.value) })
                   }
                   className="w-full p-3 bg-white/80 border border-slate-200 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-800 transition-all placeholder-slate-400"
                 />
