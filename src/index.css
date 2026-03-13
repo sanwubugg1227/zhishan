@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Nunito", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #334155;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(153, 100%, 74%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(196, 100%, 74%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(153, 100%, 74%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(196, 100%, 74%, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  .fresh-border {
+    position: relative;
+  }
+  .fresh-border::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .fresh-text {
+    color: #0f766e;
+  }
+}

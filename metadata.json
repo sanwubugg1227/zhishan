@@ -1,0 +1,5 @@
+{
+  "name": "智膳",
+  "description": "Intelligent diet recommendation app based on personal, family, and location data.",
+  "requestFramePermissions": ["geolocation"]
+}
