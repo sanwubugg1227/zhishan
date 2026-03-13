@@ -1,4 +1,4 @@
-// 记得文件名现在是：api/generate.js
+// 文件路径：api/generate.js
 export default async function handler(req, res) {
   // 只允许 POST 请求
   if (req.method !== 'POST') {
@@ -8,13 +8,13 @@ export default async function handler(req, res) {
   try {
     const { user, family, location, planType, preferences, language } = req.body;
 
-    // 从 Vercel 的环境变量中安全读取 Key
+    // 【关键修改】：只从环境变量读取 Key，地址和模型直接写死，绝不报错！
     const apiKey = process.env.SILICON_API_KEY;
-    const baseUrl = process.env.SILICON_BASE_URL || "https://api.siliconflow.cn/v1/chat/completions";
-    const modelName = process.env.SILICON_MODEL_NAME || "Qwen/Qwen2.5-7B-Instruct";
+    const baseUrl = "https://api.siliconflow.cn/v1/chat/completions";
+    const modelName = "Qwen/Qwen2.5-7B-Instruct";
 
     if (!apiKey) {
-      return res.status(500).json({ error: 'API Key not configured on server' });
+      return res.status(500).json({ error: 'API Key not configured on Vercel' });
     }
 
     const totalPeople = 1 + (family?.length || 0);
@@ -56,9 +56,13 @@ export default async function handler(req, res) {
       }),
     });
 
+    // 【新增日志】：如果对方报错，把对方的具体报错原因返回给前端
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      return res.status(response.status).json({ error: errorData.error?.message || 'API request failed' });
+      const errorText = await response.text();
+      console.error("SiliconFlow API Error:", errorText);
+      return res.status(response.status).json({ 
+        error: `大模型接口报错: 状态码 ${response.status}. 详情: ${errorText}` 
+      });
     }
 
     const data = await response.json();
