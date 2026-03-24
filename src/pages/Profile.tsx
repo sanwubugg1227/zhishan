@@ -15,7 +15,7 @@ export default function Profile() {
     removeFamilyMember,
     updateLocation,
   } = useAppContext();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [profile, setProfile] = useState<Partial<UserProfile>>(
     userProfile || {
@@ -56,22 +56,17 @@ export default function Profile() {
     }
   }, []);
 
-  // 🌍 专为国内网络优化的定位函数 (请求 Vercel 后端接口)
+  // 🌍 纯净版：直接调用后端高德 API，无弹窗、不打扰用户
   const handleDetectLocation = async () => {
     setIsLocating(true);
     try {
-      // 请求我们自己写的后端云函数，绝对安全，不暴露高德 Key
+      // 绝对不调起浏览器的 GPS，直接向我们的安全后端要数据
       const response = await fetch("/api/location");
       
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      if (!response.ok) throw new Error("网络请求失败");
       
       const data = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      if (data.error) throw new Error(data.error);
 
       // 更新状态
       setLoc({
@@ -81,9 +76,7 @@ export default function Profile() {
       });
       
     } catch (error) {
-      console.error("Location detection failed:", error);
-      // 可选：如果定位失败，可以给用户一个提示
-      // alert("自动定位失败，请手动输入");
+      console.error("Location API failed:", error);
     } finally {
       setIsLocating(false);
     }
