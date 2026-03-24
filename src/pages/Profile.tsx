@@ -49,24 +49,23 @@ export default function Profile() {
   const [showErrors, setShowErrors] = useState(false);
   const [showMemberForm, setShowMemberForm] = useState(false);
 
-  // 组件加载时，如果还没位置信息，自动尝试获取
   useEffect(() => {
     if (!loc.city && !loc.country) {
       handleDetectLocation();
     }
   }, []);
 
-  // 🌍 纯净版：直接调用后端高德 API，无弹窗、不打扰用户
+  // 🌍 纯净版：直接调用后端高德 API，并且会把真实报错弹出来
   const handleDetectLocation = async () => {
     setIsLocating(true);
     try {
-      // 绝对不调起浏览器的 GPS，直接向我们的安全后端要数据
       const response = await fetch("/api/location");
+      const data = await response.json(); // 先解析高德传回来的数据
       
-      if (!response.ok) throw new Error("网络请求失败");
-      
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
+      // 如果后端返回了 400 或 500 错误，直接抛出真实的报错信息
+      if (!response.ok) {
+         throw new Error(data.error || "网络请求失败");
+      }
 
       // 更新状态
       setLoc({
@@ -75,8 +74,10 @@ export default function Profile() {
         country: data.country || "中国",
       });
       
-    } catch (error) {
+    } catch (error: any) {
       console.error("Location API failed:", error);
+      // 直接在页面上弹窗，告诉你到底哪里错了！
+      alert("高德定位异常：" + (error.message || "未知错误"));
     } finally {
       setIsLocating(false);
     }
