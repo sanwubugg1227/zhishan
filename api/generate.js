@@ -69,16 +69,25 @@ export default async function handler(req, res) {
     const data = await response.json();
     let responseText = data.choices[0]?.message?.content || "{}";
 
+    // 智能提取 JSON 部分，防止大模型在开头或结尾加废话
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       responseText = jsonMatch[0];
     }
 
-    const parsedData = JSON.parse(responseText);
-    return res.status(200).json(parsedData);
+    // 🔥 这里就是刚才新增的拦截大模型偶尔抽风少写标点符号的代码
+    try {
+      const parsedData = JSON.parse(responseText);
+      return res.status(200).json(parsedData);
+    } catch (parseError) {
+      console.error("AI 格式错误，原始数据为:", responseText);
+      return res.status(500).json({ 
+        error: "大模型生成的食谱格式偶尔有误（少写了标点符号），请点击按钮重新生成一次哦！" 
+      });
+    }
 
   } catch (error) {
     console.error("Server Error:", error);
-    return res.status(500).json({ error: error.message || "Internal Server Error" });
+    return res.status(500).json({ error: "服务器开小差了，请稍后再试" });
   }
 }

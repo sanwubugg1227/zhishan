@@ -1,0 +1,43 @@
+Date : 2026-03-18 10:42:53
+Directory : c:\Users\12206\Desktop\智膳第二版\src
+Total : 13 files,  2089 codes, 13 comments, 136 blanks, all 2238 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |          9 |      1,682 |         12 |        114 |      1,808 |
+| TypeScript     |          3 |        353 |          1 |         15 |        369 |
+| PostCSS        |          1 |         54 |          0 |          7 |         61 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                       |         13 |      2,089 |         13 |        136 |      2,238 |
+| . (Files)                                               |          6 |        520 |          0 |         38 |        558 |
+| api                                                     |          1 |         36 |          1 |          5 |         42 |
+| components                                              |          1 |         94 |          3 |         10 |        107 |
+| pages                                                   |          5 |      1,439 |          9 |         83 |      1,531 |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                | language       | code       | comment    | blank      | total      |
++---------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\12206\Desktop\智膳第二版\src\App.tsx                | TypeScript JSX |         26 |          0 |          2 |         28 |
+| c:\Users\12206\Desktop\智膳第二版\src\api\gemini.ts          | TypeScript     |         36 |          1 |          5 |         42 |
+| c:\Users\12206\Desktop\智膳第二版\src\components\Layout.tsx  | TypeScript JSX |         94 |          3 |         10 |        107 |
+| c:\Users\12206\Desktop\智膳第二版\src\i18n.ts                | TypeScript     |        258 |          0 |          4 |        262 |
+| c:\Users\12206\Desktop\智膳第二版\src\index.css              | PostCSS        |         54 |          0 |          7 |         61 |
+| c:\Users\12206\Desktop\智膳第二版\src\main.tsx               | TypeScript JSX |         10 |          0 |          2 |         12 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\GeneratePlan.tsx | TypeScript JSX |        213 |          3 |         16 |        232 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\Home.tsx         | TypeScript JSX |        192 |          0 |          9 |        201 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\PlanView.tsx     | TypeScript JSX |        282 |          0 |         19 |        301 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\PlansList.tsx    | TypeScript JSX |        218 |          0 |         13 |        231 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\Profile.tsx      | TypeScript JSX |        534 |          6 |         26 |        566 |
+| c:\Users\12206\Desktop\智膳第二版\src\store.tsx              | TypeScript JSX |        113 |          0 |         17 |        130 |
+| c:\Users\12206\Desktop\智膳第二版\src\types.ts               | TypeScript     |         59 |          0 |          6 |         65 |
+| Total                                                   |                |      2,089 |         13 |        136 |      2,238 |
++---------------------------------------------------------+----------------+------------+------------+------------+------------+

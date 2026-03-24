@@ -1,0 +1,58 @@
+Date : 2026-03-18 10:47:59
+Directory : c:\Users\12206\Desktop\智膳第二版
+Total : 21 files,  8819 codes, 16 comments, 165 blanks, all 9000 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |      6,608 |          0 |          3 |      6,611 |
+| TypeScript JSX     |          9 |      1,682 |         12 |        114 |      1,808 |
+| TypeScript         |          4 |        374 |          3 |         17 |        394 |
+| PostCSS            |          1 |         54 |          0 |          7 |         61 |
+| Python             |          1 |         50 |          1 |         13 |         64 |
+| JSON with Comments |          1 |         26 |          0 |          1 |         27 |
+| Markdown           |          1 |         13 |          0 |          8 |         21 |
+| HTML               |          1 |         12 |          0 |          2 |         14 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                       |         21 |      8,819 |         16 |        165 |      9,000 |
+| . (Files)                                               |          8 |      6,730 |          3 |         29 |      6,762 |
+| src                                                     |         13 |      2,089 |         13 |        136 |      2,238 |
+| src (Files)                                             |          6 |        520 |          0 |         38 |        558 |
+| src\api                                                 |          1 |         36 |          1 |          5 |         42 |
+| src\components                                          |          1 |         94 |          3 |         10 |        107 |
+| src\pages                                               |          5 |      1,439 |          9 |         83 |      1,531 |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                | language           | code       | comment    | blank      | total      |
++---------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\12206\Desktop\智膳第二版\README.md                  | Markdown           |         13 |          0 |          8 |         21 |
+| c:\Users\12206\Desktop\智膳第二版\extract_code.py            | Python             |         50 |          1 |         13 |         64 |
+| c:\Users\12206\Desktop\智膳第二版\index.html                 | HTML               |         12 |          0 |          2 |         14 |
+| c:\Users\12206\Desktop\智膳第二版\metadata.json              | JSON               |          5 |          0 |          1 |          6 |
+| c:\Users\12206\Desktop\智膳第二版\package-lock.json          | JSON               |      6,562 |          0 |          1 |      6,563 |
+| c:\Users\12206\Desktop\智膳第二版\package.json               | JSON               |         41 |          0 |          1 |         42 |
+| c:\Users\12206\Desktop\智膳第二版\src\App.tsx                | TypeScript JSX     |         26 |          0 |          2 |         28 |
+| c:\Users\12206\Desktop\智膳第二版\src\api\gemini.ts          | TypeScript         |         36 |          1 |          5 |         42 |
+| c:\Users\12206\Desktop\智膳第二版\src\components\Layout.tsx  | TypeScript JSX     |         94 |          3 |         10 |        107 |
+| c:\Users\12206\Desktop\智膳第二版\src\i18n.ts                | TypeScript         |        258 |          0 |          4 |        262 |
+| c:\Users\12206\Desktop\智膳第二版\src\index.css              | PostCSS            |         54 |          0 |          7 |         61 |
+| c:\Users\12206\Desktop\智膳第二版\src\main.tsx               | TypeScript JSX     |         10 |          0 |          2 |         12 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\GeneratePlan.tsx | TypeScript JSX     |        213 |          3 |         16 |        232 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\Home.tsx         | TypeScript JSX     |        192 |          0 |          9 |        201 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\PlanView.tsx     | TypeScript JSX     |        282 |          0 |         19 |        301 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\PlansList.tsx    | TypeScript JSX     |        218 |          0 |         13 |        231 |
+| c:\Users\12206\Desktop\智膳第二版\src\pages\Profile.tsx      | TypeScript JSX     |        534 |          6 |         26 |        566 |
+| c:\Users\12206\Desktop\智膳第二版\src\store.tsx              | TypeScript JSX     |        113 |          0 |         17 |        130 |
+| c:\Users\12206\Desktop\智膳第二版\src\types.ts               | TypeScript         |         59 |          0 |          6 |         65 |
+| c:\Users\12206\Desktop\智膳第二版\tsconfig.json              | JSON with Comments |         26 |          0 |          1 |         27 |
+| c:\Users\12206\Desktop\智膳第二版\vite.config.ts             | TypeScript         |         21 |          2 |          2 |         25 |
+| Total                                                   |                    |      8,819 |         16 |        165 |      9,000 |
++---------------------------------------------------------+--------------------+------------+------------+------------+------------+
