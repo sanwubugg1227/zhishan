@@ -69,18 +69,26 @@ export default async function handler(req, res) {
     const data = await response.json();
     let responseText = data.choices[0]?.message?.content || "{}";
 
-    // 智能提取 JSON 部分，防止大模型在开头或结尾加废话
-    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      responseText = jsonMatch[0];
-    }
+    // 🌟 超强 JSON 净化器开始 🌟
+    // 1. 暴力扒掉大模型喜欢乱加的 Markdown 外套 (比如 ```json 和 ```)
+    responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
 
-    // 🔥 这里就是刚才新增的拦截大模型偶尔抽风少写标点符号的代码
+    // 2. 智能提取纯 JSON 部分（精准定位第一个 { 和最后一个 }）
+    const firstBrace = responseText.indexOf('{');
+    const lastBrace = responseText.lastIndexOf('}');
+    
+    if (firstBrace !== -1 && lastBrace !== -1) {
+      responseText = responseText.substring(firstBrace, lastBrace + 1);
+    }
+    // 🌟 超强 JSON 净化器结束 🌟
+
     try {
+      // 尝试解析清洗后的干净数据
       const parsedData = JSON.parse(responseText);
       return res.status(200).json(parsedData);
     } catch (parseError) {
-      console.error("AI 格式错误，原始数据为:", responseText);
+      // 只有在彻底救不回来的情况下，才让用户重试
+      console.error("AI 格式彻底崩溃，原始数据为:", responseText);
       return res.status(500).json({ 
         error: "大模型生成的食谱格式偶尔有误（少写了标点符号），请点击按钮重新生成一次哦！" 
       });
